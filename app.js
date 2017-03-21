@@ -1,8 +1,11 @@
 'use strict';
 var products = [];
 var imageFile = []; //image path array
-var photoIds = ['leftimage', 'centerimage', 'rightimage'];
 var counter = 0;
+
+var imageLeft = document.getElementById('leftimage');
+var imageCenter = document.getElementById('centerimage');
+var imageRight = document.getElementById('rightimage');
 
 var body = document.getElementsByTagName('body')[0];
 
@@ -44,24 +47,59 @@ function randomNumber() {
 var priorImages = [];
 
 function generateImages() {
-  var currentImages = [];
   console.log('prior' + priorImages);
-  while (currentImages < 3) {
+  while (currentImages.length < 3) {
     var randomSelection = randomNumber();
     if (!priorImages.includes(randomSelection) && !currentImages.includes(randomSelection)) {
       currentImages.push(randomSelection);
     }
   }
+  var prod1 = products[currentImages[0]];
+  var prod2 = products[currentImages[1]];
+  var prod3 = products[currentImages[2]];
+
+  imageLeft.src = prod1.filePath;
+  imageCenter.src = prod2.filePath;
+  imageRight.src = prod3.filePath;
+
+  imageLeft.alt = currentImages[0];
+  imageRight.alt = currentImages[1];
+  imageLeft.alt = currentImages[2];
 
   priorImages = currentImages;
-  var imageLeft = imageFile[currentImages[0]].filePath;
-  var imageCenter = imageFile[currentImages[1]].filePath;
-  var imageRight = imageFile[currentImages[2]].filePath;
   console.log('current' + currentImages);
-  document.getElementById('leftimage').src = imageLeft;
-  document.getElementById('centerimage').src = imageCenter;
-  document.getElementById('rightimage').src = imageRight;
 
 };
-
 generateImages();
+
+var clickLimit = 25;
+function handleTheClick() {
+  randomImage();
+  totalClicks++;
+
+  var productiDx = this.alt;
+
+  products[productIdx].itemClick++;
+
+  if (timesClicked < clickLimit) {
+    imageLeft.removeEventListener('click', handleTheClick);
+    imageCenter.removeEventListener('click', handleTheClick);
+    imageRight.removeEventListener('click', handleTheClick);
+    productClicks();
+  }
+};
+imageLeft.addEventListener('click', handleTheClick);
+imageCenter.addEventListener('click', handleTheClick);
+imageRight.addEventListener('click', handleTheClick);
+
+function productClicks () {
+  var content = document.getElementById('content');
+  var ul = document.createElement('ul');
+  content.appendChild(ul);
+  for (var i = 0; i < products.length; i++) {
+    var li = document.createElement('li');
+    var dataStr = products[i].itemClick + ' clicks for ' + products[i].name;
+    li.innterText = dataStr;
+    ul.appendChild(li);
+  }
+}
