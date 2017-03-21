@@ -72,10 +72,21 @@ function generateImages() {
 };
 generateImages();
 
+var clickLimit = 25;
 function handleTheClick() {
   randomImage();
   totalClicks++;
+
+  var productiDx = this.alt;
+
+  products[productIdx].itemClick++;
 };
+
+if (timesClicked < clickLimit) {
+  imageLeft.removeEventListener('click', handleTheClick);
+  imageCenter.removeEventListener('click', handleTheClick);
+  imageRight.removeEventListener('click', handleTheClick);
+}
 
 imageLeft.addEventListener('click', handleTheClick);
 imageCenter.addEventListener('click', handleTheClick);
