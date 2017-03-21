@@ -86,8 +86,30 @@ if (timesClicked < clickLimit) {
   imageLeft.removeEventListener('click', handleTheClick);
   imageCenter.removeEventListener('click', handleTheClick);
   imageRight.removeEventListener('click', handleTheClick);
-}
 
+  imageLeft.addEventListener('click', handleTheClick);
+  imageCenter.addEventListener('click', handleTheClick);
+  imageRight.addEventListener('click', handleTheClick);
+
+  if (timesClicked < clickLimit) {
+    imageLeft.removeEventListener('click', handleTheClick);
+    imageCenter.removeEventListener('click', handleTheClick);
+    imageRight.removeEventListener('click', handleTheClick);
+    productClicks();
+  }
+};
 imageLeft.addEventListener('click', handleTheClick);
 imageCenter.addEventListener('click', handleTheClick);
 imageRight.addEventListener('click', handleTheClick);
+
+function productClicks () {
+  var content = document.getElementById('content');
+  var ul = document.createElement('ul');
+  content.appendChild(ul);
+  for (var i = 0; i < products.length; i++) {
+    var li = document.createElement('li');
+    var dataStr = products[i].itemClick + ' clicks for ' + products[i].name;
+    li.innterText = dataStr;
+    ul.appendChild(li);
+  }
+}
