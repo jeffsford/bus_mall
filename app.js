@@ -1,13 +1,11 @@
 'use strict';
 var products = [];
 var imageFile = []; //image path array
-var counter = 0;
+var totalClicks = 0;
 
 var imageLeft = document.getElementById('leftimage');
 var imageCenter = document.getElementById('centerimage');
 var imageRight = document.getElementById('rightimage');
-
-var body = document.getElementsByTagName('body')[0];
 
 var bag = new Product('Star Wars Luggage', 'images/bag.jpg', 'bag');
 var banana = new Product('Banana Slicer', 'images/banana.jpg', 'banana');
@@ -47,6 +45,7 @@ function randomNumber() {
 var priorImages = [];
 
 function generateImages() {
+  var currentImages = [];
   console.log('prior' + priorImages);
   while (currentImages.length < 3) {
     var randomSelection = randomNumber();
@@ -63,25 +62,28 @@ function generateImages() {
   imageRight.src = prod3.filePath;
 
   imageLeft.alt = currentImages[0];
-  imageRight.alt = currentImages[1];
-  imageLeft.alt = currentImages[2];
+  imageCenter.alt = currentImages[1];
+  imageRight.alt = currentImages[2];
 
   priorImages = currentImages;
   console.log('current' + currentImages);
 
+  prod1.timesShown++;
+  prod2.timesShown++;
+  prod3.timesShown++;
 };
 generateImages();
 
 var clickLimit = 25;
 function handleTheClick() {
-  randomImage();
+  generateImages();
   totalClicks++;
+  console.log(totalClicks);
+  var productIdx = this.alt;
 
-  var productiDx = this.alt;
+  products[productIdx].timesClicked++;
 
-  products[productIdx].itemClick++;
-
-  if (timesClicked < clickLimit) {
+  if (totalClicks === clickLimit) {
     imageLeft.removeEventListener('click', handleTheClick);
     imageCenter.removeEventListener('click', handleTheClick);
     imageRight.removeEventListener('click', handleTheClick);
@@ -98,7 +100,7 @@ function productClicks () {
   content.appendChild(ul);
   for (var i = 0; i < products.length; i++) {
     var li = document.createElement('li');
-    var dataStr = products[i].itemClick + ' clicks for ' + products[i].name;
+    var dataStr = products[i].timesClicked + ' clicks for ' + products[i].name;
     li.innterText = dataStr;
     ul.appendChild(li);
   }

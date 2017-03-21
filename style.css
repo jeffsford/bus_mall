@@ -1,9 +1,5 @@
-.images {
-float: left;
-}
-
 img {
   width: 200px;
   float: left;
-  border: thin solid red;
+  border: thin solid black;
 }
