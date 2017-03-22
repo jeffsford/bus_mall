@@ -45,7 +45,9 @@ function randomNumber() {
 var priorImages = [];
 
 function generateImages() {
+
   var currentImages = [];
+
   while (currentImages.length < 3) {
     var randomSelection = randomNumber();
     if (!priorImages.includes(randomSelection) && !currentImages.includes(randomSelection)) {
@@ -81,6 +83,7 @@ function handleTheClick() {
 
   products[productIdx].timesClicked++;
   if (totalClicks === clickLimit) {
+
     imageLeft.removeEventListener('click', handleTheClick);
     imageCenter.removeEventListener('click', handleTheClick);
     imageRight.removeEventListener('click', handleTheClick);
@@ -98,7 +101,9 @@ function productClicks () {
   for (var i = 0; i < products.length; i++) {
     var li = document.createElement('li');
     var dataStr = products[i].timesClicked + ' clicks for ' + products[i].name;
+
     li.innerText = dataStr;
+
     ul.appendChild(li);
   }
 }
