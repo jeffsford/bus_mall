@@ -38,14 +38,14 @@ header {
 .images{
   width: 1000px;
   margin: auto;
-  margin-left: 385px;
+  margin-left: 481px;
 }
 
 #welcome {
   background-color: #fff;
   width: 275px;
   height: 100%;
-  margin-left: 84px;
+  margin-left: 191px;
   margin-bottom: 20px;
   display: inline-block;
   float: left;
