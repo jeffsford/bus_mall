@@ -78,7 +78,6 @@ var clickLimit = 25;
 function handleTheClick() {
   generateImages();
   totalClicks++;
-  console.log(totalClicks);
   var productIdx = this.alt;
 
   products[productIdx].timesClicked++;
@@ -94,16 +93,38 @@ imageLeft.addEventListener('click', handleTheClick);
 imageCenter.addEventListener('click', handleTheClick);
 imageRight.addEventListener('click', handleTheClick);
 
+var voteTotals = [];
+var nameArray = [];
 function productClicks () {
-  var content = document.getElementById('welcome');
-  var ul = document.createElement('ul');
-  welcome.appendChild(ul);
   for (var i = 0; i < products.length; i++) {
-    var li = document.createElement('li');
-    var dataStr = products[i].timesClicked + ' clicks for ' + products[i].name;
-
-    li.innerText = dataStr;
-
-    ul.appendChild(li);
+    voteTotals.push(products[i].timesClicked);
+    nameArray.push(products[i].name);
   }
-}
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  canvas.setAttribute('class', 'visible');
+
+  var data = {
+    labels: nameArray,
+    datasets: [{
+      label: 'Clicks Received',
+      data: voteTotals,
+      backgroundColor: '#8e1517'
+    }, {
+    }]
+  };
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+};
