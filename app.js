@@ -92,9 +92,9 @@ imageCenter.addEventListener('click', handleTheClick);
 imageRight.addEventListener('click', handleTheClick);
 
 function productClicks () {
-  var content = document.getElementById('content');
+  var content = document.getElementById('welcome');
   var ul = document.createElement('ul');
-  content.appendChild(ul);
+  welcome.appendChild(ul);
   for (var i = 0; i < products.length; i++) {
     var li = document.createElement('li');
     var dataStr = products[i].timesClicked + ' clicks for ' + products[i].name;
