@@ -45,8 +45,9 @@ function randomNumber() {
 var priorImages = [];
 
 function generateImages() {
-  currentImages = [];
-  console.log('prior' + priorImages);
+
+  var currentImages = [];
+
   while (currentImages.length < 3) {
     var randomSelection = randomNumber();
     if (!priorImages.includes(randomSelection) && !currentImages.includes(randomSelection)) {
@@ -66,7 +67,6 @@ function generateImages() {
   imageRight.alt = currentImages[2];
 
   priorImages = currentImages;
-  console.log('current' + currentImages);
 
   prod1.timesShown++;
   prod2.timesShown++;
@@ -78,11 +78,12 @@ var clickLimit = 25;
 function handleTheClick() {
   generateImages();
   totalClicks++;
-
+  console.log(totalClicks);
   var productIdx = this.alt;
-  products[productIdx].timesClicked++;
 
-  if (timesClicked === clickLimit) {
+  products[productIdx].timesClicked++;
+  if (totalClicks === clickLimit) {
+
     imageLeft.removeEventListener('click', handleTheClick);
     imageCenter.removeEventListener('click', handleTheClick);
     imageRight.removeEventListener('click', handleTheClick);
@@ -94,13 +95,15 @@ imageCenter.addEventListener('click', handleTheClick);
 imageRight.addEventListener('click', handleTheClick);
 
 function productClicks () {
-  var content = document.getElementById('content');
+  var content = document.getElementById('welcome');
   var ul = document.createElement('ul');
-  content.appendChild(ul);
+  welcome.appendChild(ul);
   for (var i = 0; i < products.length; i++) {
     var li = document.createElement('li');
     var dataStr = products[i].timesClicked + ' clicks for ' + products[i].name;
-    li.innterText = dataStr;
+
+    li.innerText = dataStr;
+
     ul.appendChild(li);
   }
 }
