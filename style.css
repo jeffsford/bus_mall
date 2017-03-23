@@ -83,6 +83,18 @@ height: 200px;
 padding: 10px;
 }
 
+#left-image:hover {
+  background-color: #8e1517;
+}
+
+#center-image:hover {
+  background-color: #8e1517;
+}
+
+#right-image:hover {
+  background-color: #8e1517;
+}
+
 .images{
   width: 1000px;
   margin: auto;

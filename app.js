@@ -1,6 +1,6 @@
 'use strict';
 var products = [];
-var imageFile = []; //image path array
+var imageFile = [];
 var totalClicks = 0;
 
 var imageLeft = document.getElementById('left-image');
