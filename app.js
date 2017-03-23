@@ -3,9 +3,9 @@ var products = [];
 var imageFile = []; //image path array
 var totalClicks = 0;
 
-var imageLeft = document.getElementById('leftimage');
-var imageCenter = document.getElementById('centerimage');
-var imageRight = document.getElementById('rightimage');
+var imageLeft = document.getElementById('left-image');
+var imageCenter = document.getElementById('center-image');
+var imageRight = document.getElementById('right-image');
 
 var bag = new Product('Star Wars Luggage', 'images/bag.jpg', 'bag');
 var banana = new Product('Banana Slicer', 'images/banana.jpg', 'banana');
