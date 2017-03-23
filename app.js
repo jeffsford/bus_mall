@@ -1,11 +1,11 @@
 'use strict';
 var products = [];
-var imageFile = []; //image path array
+var imageFile = [];
 var totalClicks = 0;
 
-var imageLeft = document.getElementById('leftimage');
-var imageCenter = document.getElementById('centerimage');
-var imageRight = document.getElementById('rightimage');
+var imageLeft = document.getElementById('left-image');
+var imageCenter = document.getElementById('center-image');
+var imageRight = document.getElementById('right-image');
 
 var bag = new Product('Star Wars Luggage', 'images/bag.jpg', 'bag');
 var banana = new Product('Banana Slicer', 'images/banana.jpg', 'banana');
@@ -27,6 +27,7 @@ var unicorn = new Product('Unicorn', 'images/unicorn.jpg', 'unicorn');
 var usb = new Product('Dragon Tail USB Drive', 'images/usb.gif', 'usb');
 var waterCan = new Product('Novelty Watering Can', 'images/water-can.jpg', 'watercan');
 var wineGlass = new Product('Novelty Wine Glass', 'images/wine-glass.jpg', 'wineglass');
+
 if (localStorage.lsProducts) {
   var existingData = JSON.parse(localStorage.lsProducts);
   for( var i = 0; i < existingData.length; i++){
@@ -52,9 +53,7 @@ function randomNumber() {
 var priorImages = [];
 
 function generateImages() {
-
   var currentImages = [];
-
   while (currentImages.length < 3) {
     var randomSelection = randomNumber();
     if (!priorImages.includes(randomSelection) && !currentImages.includes(randomSelection)) {
@@ -86,7 +85,6 @@ function handleTheClick() {
   generateImages();
   totalClicks++;
   var productIdx = this.alt;
-
   products[productIdx].timesClicked++;
   if (totalClicks === clickLimit) {
     localStorage.lsProducts = JSON.stringify(products);
@@ -94,9 +92,9 @@ function handleTheClick() {
     imageCenter.removeEventListener('click', handleTheClick);
     imageRight.removeEventListener('click', handleTheClick);
     productClicks();
-
   }
 };
+
 imageLeft.addEventListener('click', handleTheClick);
 imageCenter.addEventListener('click', handleTheClick);
 imageRight.addEventListener('click', handleTheClick);
@@ -121,7 +119,6 @@ function productClicks () {
     }, {
     }]
   };
-
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: data,
