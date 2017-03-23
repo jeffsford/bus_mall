@@ -27,8 +27,15 @@ var unicorn = new Product('Unicorn', 'images/unicorn.jpg', 'unicorn');
 var usb = new Product('Dragon Tail USB Drive', 'images/usb.gif', 'usb');
 var waterCan = new Product('Novelty Watering Can', 'images/water-can.jpg', 'watercan');
 var wineGlass = new Product('Novelty Wine Glass', 'images/wine-glass.jpg', 'wineglass');
+if (localStorage.lsProducts) {
+  var existingData = JSON.parse(localStorage.lsProducts);
+  for( var i = 0; i < existingData.length; i++){
+    products[i].timesClicked += existingData[i].timesClicked;
+    products[i].timesShown += existingData[i].timesShown;
+  }
+};
 
-function Product(name, filePath, idString, timesShown, timesClicked) {
+function Product(name, filePath, idString) {
   this.name = name;
   this.filePath = filePath;
   this.idString = idString;
@@ -82,11 +89,12 @@ function handleTheClick() {
 
   products[productIdx].timesClicked++;
   if (totalClicks === clickLimit) {
-
+    localStorage.lsProducts = JSON.stringify(products);
     imageLeft.removeEventListener('click', handleTheClick);
     imageCenter.removeEventListener('click', handleTheClick);
     imageRight.removeEventListener('click', handleTheClick);
     productClicks();
+
   }
 };
 imageLeft.addEventListener('click', handleTheClick);
